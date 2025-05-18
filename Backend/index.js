@@ -1,16 +1,16 @@
 const express = require('express');
-
+const cors = require("cors")
+const authRoutes = require("./routes/auth/authRoutes")
 const MongoConnection = require("../Backend/config/ConnectMongo");
 
 const app = express();
-
+app.use(cors())
 app.use(express.json());
 
 MongoConnection();
 
-const registerUser = require("./routes/register")
 
-app.use("/register",registerUser)
+app.use("/auth",authRoutes)
 // Example route
 app.get('/', (req, res) => {
     res.send('Task Tracker API');

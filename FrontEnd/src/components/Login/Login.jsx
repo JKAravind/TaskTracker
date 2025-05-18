@@ -1,18 +1,16 @@
 import { useState } from "react";
 import { Link } from 'react-router-dom';
-
-
+import axios from "axios";
 
 const Login =()=>{
-
     const [formData , setFormData] = useState({
-        name:"",
-        username:"",
-        country:"",
+        email:"",
         password:""
     })
 
     const [error, setError] = useState("");
+    const [loginMessage, setLoginMessage] = useState("");
+    
     
 
     const handleChange = (e) => {
@@ -22,24 +20,32 @@ const Login =()=>{
         }));
     };
 
-
-        const handleSubmit = (e) => {
+        const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!formData.email || !formData.password || !formData.name || !formData.country) {
+
+        if (!formData.email || !formData.password ) {
         setError("Please fill in all fields.");
         return;
         }
         
         setError("");
 
-        console.log("Registering user:", formData);
+        try{
+            const response = await axios.post("http://192.168.0.151:5000/auth/login",formData)
+
+            console.log("success",response.data.message)
+            setLoginMessage(response.data.message)
+        }
+        catch(error){
+            console.log(error.response)
+
+        }
+
 
         setFormData({
         email: "",
         password: "",
-        name: "",
-        country: "",
         });
     };
 
@@ -50,21 +56,14 @@ const Login =()=>{
             <form>
                 <input type="email"
                 name="email"
+                value={formData.email}
                 placeholder="enter Your Mail"
                 onChange={handleChange} />
 
-                <input type="text"
-                name="username"
-                placeholder="Enter Your name"
-                onChange={handleChange} />
-
-                <input type="text" 
-                name="country"
-                placeholder="Enter Your Nationality" 
-                onChange={handleChange}/>
 
                 <input type="password" 
-                name="country" 
+                name="password" 
+                value={formData.password}
                 placeholder="Enter Your password"
                 onChange={handleChange} />
 
@@ -72,6 +71,10 @@ const Login =()=>{
                 <button onClick={handleSubmit}>
                     Submit
                 </button>
+
+                {error && <p style={{ color: "red" }}>{error}</p>}
+                {loginMessage && <p style={{ color: "green" }}>{loginMessage}</p>}
+
 
                 <p>Don't have an account? <Link to="/register">Register here</Link></p>
 
