@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { Link } from 'react-router-dom';
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Login =()=>{
+    const navigate = useNavigate();
+
     const [formData , setFormData] = useState({
         email:"",
         password:""
@@ -33,9 +36,13 @@ const Login =()=>{
 
         try{
             const response = await axios.post("http://192.168.0.151:5000/auth/login",formData)
-
             console.log("success",response.data.message)
             setLoginMessage(response.data.message)
+            const token = response.data.token
+            localStorage.setItem("jwtToken", token)
+            navigate("/dashboard")
+
+
         }
         catch(error){
             console.log(error.response)
