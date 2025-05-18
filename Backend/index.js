@@ -1,6 +1,6 @@
 const express = require('express');
 
-const MongoConnection = require("../Backend/config/MongoConnection");
+const MongoConnection = require("../Backend/config/ConnectMongo");
 
 const app = express();
 
