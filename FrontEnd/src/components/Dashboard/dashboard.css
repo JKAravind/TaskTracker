@@ -1,0 +1,103 @@
+/* Container and other base styles remain the same */
+
+/* Task list container */
+.task-list {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* space between tasks */
+}
+
+/* Single task card - flex row */
+.task-item {
+  background: #f7f9fc;
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 4px 8px rgba(74, 144, 226, 0.1);
+  
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Task text container for title + description stacked */
+.task-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1; /* takes all remaining space */
+  margin-right: 1rem;
+}
+
+/* Task title */
+.task-text .title {
+  font-weight: 700;
+  font-size: 18px;
+  color: #2c3e50;
+}
+
+/* Task description */
+.task-text .description {
+  font-size: 14px;
+  color: #7f8c8d;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Delete button */
+.task-item button {
+  flex-shrink: 0;
+  background: #e74c3c;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 20px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 14px;
+  min-width: 70px;
+}
+
+.task-item button:hover {
+  background: #c0392b;
+}
+
+/* Modal form buttons flex container */
+.modal form {
+  display: flex;
+  gap: 12px;
+  margin-top: 1rem;
+}
+
+.modal button[type="submit"],
+.modal button[type="button"] {
+  flex: 1;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 12px 0;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.modal button[type="submit"] {
+  background-color: #4caf50;
+  color: white;
+}
+
+.modal button[type="submit"]:hover {
+  background-color: #3a9d48;
+}
+
+.modal button[type="button"] {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.modal button[type="button"]:hover {
+  background-color: #c0392b;
+}
