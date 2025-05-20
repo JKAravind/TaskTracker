@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require("cors")
+require('dotenv').config();
 const authRoutes = require("./routes/auth/authRoutes")
 const dashboard = require("./routes/dashboard")
 const projects = require("./routes/project/projects")
@@ -8,7 +9,7 @@ const MongoConnection = require("../Backend/config/ConnectMongo");
 const app = express();
 
 app.use(cors({
-  origin: `${import.meta.env.FRONT_END_URI}`,
+  origin: process.env.FRONT_END_URI,
   credentials: true 
 }));
 
