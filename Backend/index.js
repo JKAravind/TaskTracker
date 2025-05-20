@@ -6,16 +6,25 @@ const dashboard = require("./routes/dashboard")
 const projects = require("./routes/project/projects")
 const MongoConnection = require("../Backend/config/ConnectMongo");
 
+const express = require('express');
+const cors = require('cors');
 const app = express();
 
 app.use(cors({
-  origin: process.env.FRONT_END_URI,
-  credentials: true 
+  origin: (origin, callback) => {
+    const allowedOrigins = [process.env.FRONT_END_URI];
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
 }));
 
-app.use(express.json());
+app.options('*', cors());
 
-MongoConnection();
+app.use(express.json());
 
 
 app.use("/auth",authRoutes)
