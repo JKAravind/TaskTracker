@@ -1,0 +1,19 @@
+.logout-button {
+  position: fixed;  /* fixed relative to viewport */
+  top: 20px;        /* distance from top of the window */
+  right: 20px;      /* distance from right of the window */
+  padding: 8px 15px;
+  cursor: pointer;
+  background-color: #ffffff;
+  color: rgb(180, 167, 167);
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  z-index: 1000;  /* keep it on top */
+}
+
+.logout-button:hover {
+  background-color: #c9302c;
+  color: white;
+}

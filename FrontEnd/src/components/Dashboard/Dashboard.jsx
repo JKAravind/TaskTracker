@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Dashboard.css';  
 import { useNavigate } from 'react-router-dom';
-
+import Navbar from '../NavBar/NavBar';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -98,6 +98,7 @@ const deleteProject = async (projectId) => {
 
 return (
     <div className='Main'>
+      <Navbar/>
       <button onClick={addExercise}>+ Add Task</button>
 
             {showModal && (
