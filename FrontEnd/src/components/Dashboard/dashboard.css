@@ -101,3 +101,86 @@
 .modal button[type="button"]:hover {
   background-color: #c0392b;
 }
+
+.project-cards-container {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding: 1rem 0;
+  scroll-behavior: smooth;
+}
+
+/* Individual project card style */
+.project-card {
+  flex: 0 0 280px; /* fixed width, don't shrink */
+  background: #f7f9fc;
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 4px 8px rgba(74, 144, 226, 0.1);
+  height: 400px;
+
+  border: 5px solid #dbeafe;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  /* To avoid text overflow */
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+/* Project title */
+.project-title {
+  font-weight: 700;
+  font-size: 18px;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+/* Project description */
+.project-description {
+  font-size: 14px;
+  color: #7f8c8d;
+  margin-bottom: 1rem;
+  flex-grow: 1;
+}
+
+/* Buttons container - optional, to stack or align buttons */
+.project-card button {
+  background: #4caf50;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 14px;
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+
+.project-card button:last-child {
+  background: #e74c3c;
+  margin-bottom: 0;
+}
+
+.project-card button:hover {
+  filter: brightness(0.9);
+}
+
+/* Hide horizontal scrollbar in WebKit browsers (optional) */
+.project-cards-container::-webkit-scrollbar {
+  height: 6px;
+}
+
+.project-cards-container::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.2);
+  border-radius: 3px;
+}
+.Main{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}

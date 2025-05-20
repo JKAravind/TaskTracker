@@ -2,9 +2,11 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Dashboard.css';  
+import { useNavigate } from 'react-router-dom';
 
 
 const Dashboard = () => {
+  const navigate = useNavigate();
     const token = localStorage.getItem('jwtToken');
     const [showModal, setShowModal] = useState(false);
     const [task, setTask] = useState({ title: '', description: '' });    
@@ -79,8 +81,23 @@ const Dashboard = () => {
         fetchUser();
     }, []);
 
+const deleteProject = async (projectId) => {
+    if (!window.confirm("Are you sure you want to delete this project?")) return;
+
+  try {
+    await axios.delete(`http://192.168.0.151:5000/project/delete/${projectId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    setProjectArray((prevArray) => prevArray.filter((proj) => proj._id !== projectId));
+  } catch (err) {
+    console.log("Failed to delete project", err);
+  }
+};
+
 return (
-    <div>
+    <div className='Main'>
       <button onClick={addExercise}>+ Add Task</button>
 
             {showModal && (
@@ -110,22 +127,20 @@ return (
         </div>
       )}
       <div>
-              <div className="task-list">
-        {projectArray.length === 0 ? (
-          <p className="no-tasks">No Tasks Yet</p>
-        ) : (
-          projectArray.map((proj) => (
-            <div key={proj.id} className="task-item">
-              <div className="task-text">
-                <p className="title">{proj.title}</p>
-                <p className="description">{proj.description}</p>
-              </div>
-              <button onClick={() => deleteTask(proj.id)}>Delete</button>
-              <button onClick={() => deleteTask(proj.id)}>Delete</button>
-            </div>
-          ))
-        )}
+              <div className="project-cards-container">
+  {projectArray.length === 0 ? (
+    <p className="no-tasks">No Projects Yet</p>
+  ) : (
+    projectArray.map((proj) => (
+      <div key={proj._id} className="project-card">
+        <p className="project-title">{proj.title}</p>
+        <p className="project-description">{proj.description}</p>
+        <button onClick={() => navigate(`/project/${proj._id}`)}>Manage Tasks</button>
+        <button onClick={() => deleteProject(proj._id)}>Delete</button>
       </div>
+    ))
+  )}
+</div>
       </div>
 
     </div>

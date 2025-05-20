@@ -16,6 +16,7 @@ app.use("/auth",authRoutes)
 app.use("/dashboard",dashboard)
 app.use("/project",projects)
 
+
 app.get('/', (req, res) => {
     res.send('Task Tracker API');
 });
