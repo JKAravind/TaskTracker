@@ -6,7 +6,12 @@ const projects = require("./routes/project/projects")
 const MongoConnection = require("../Backend/config/ConnectMongo");
 
 const app = express();
-app.use(cors())
+
+app.use(cors({
+  origin: `${import.meta.env.FRONT_END_URI}`,
+  credentials: true 
+}));
+
 app.use(express.json());
 
 MongoConnection();
