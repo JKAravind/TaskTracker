@@ -10,6 +10,7 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 
+// CORS config
 app.use(cors({
   origin: (origin, callback) => {
     const allowedOrigins = [process.env.FRONT_END_URI];
@@ -25,6 +26,8 @@ app.use(cors({
 app.options('*', cors());
 
 app.use(express.json());
+
+MongoConnection();
 
 
 app.use("/auth",authRoutes)
