@@ -35,14 +35,13 @@ const Login =()=>{
         setError("");
 
         try{
-            const response = await axios.post("http://192.168.0.151:5000/auth/login",formData)
+            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/auth/login`,formData)
             console.log("success",response.data.message)
             setLoginMessage(response.data.message)
             const token = response.data.token
             localStorage.setItem("jwtToken", token)
             navigate("/dashboard")
-
-
+            
         }
         catch(error){
             console.log(error.response)

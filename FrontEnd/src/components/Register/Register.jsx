@@ -35,7 +35,7 @@ export default function Register() {
 
     try{
       console.log(11111)
-      const response = await axios.post("http://192.168.0.151:5000/auth/register", formData)
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/auth/register`, formData)
       setFormData({
         email:"",
         username:"",

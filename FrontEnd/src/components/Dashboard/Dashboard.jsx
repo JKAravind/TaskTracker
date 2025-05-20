@@ -22,7 +22,7 @@ const Dashboard = () => {
         e.preventDefault();
 
         try{
-            const respose = await axios.post("http://192.168.0.151:5000/project/add",task, {
+            const respose = await axios.post(`${import.meta.env.VITE_BASE_URL}/project/add`,task, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -56,14 +56,14 @@ const Dashboard = () => {
             if (!token) return;
 
             try {
-                const userResponse = await axios.get('http://192.168.0.151:5000/dashboard', {
+                const userResponse = await axios.get(`${import.meta.env.VITE_BASE_URL}/dashboard`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
                 setUser(userResponse.data);
 
-                const projectListResponse = await axios.get("http://192.168.0.151:5000/project/fetchList",{
+                const projectListResponse = await axios.get(`${import.meta.env.VITE_BASE_URL}/project/fetchList`,{
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -85,7 +85,7 @@ const deleteProject = async (projectId) => {
     if (!window.confirm("Are you sure you want to delete this project?")) return;
 
   try {
-    await axios.delete(`http://192.168.0.151:5000/project/delete/${projectId}`, {
+    await axios.delete(`${import.meta.env.VITE_BASE_URL}/project/delete/${projectId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

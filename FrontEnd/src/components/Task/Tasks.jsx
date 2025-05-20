@@ -15,13 +15,13 @@ const TaskManager = () => {
   useEffect(() => {
     const fetchProjectAndTasks = async () => {
       try {
-        const projectRes = await axios.get(`http://192.168.0.151:5000/project/${projectId}/projectDetail`, {
+        const projectRes = await axios.get(`${import.meta.env.VITE_BASE_URL}/project/${projectId}/projectDetail`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setProjectDetails(projectRes.data);
 
 
-        const tasksRes = await axios.get(`http://192.168.0.151:5000/project/${projectId}/taskList`, {
+        const tasksRes = await axios.get(`${import.meta.env.VITE_BASE_URL}/project/${projectId}/taskList`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setTaskList(tasksRes.data);
@@ -43,7 +43,7 @@ const TaskManager = () => {
 
     try {
       const response = await axios.post(
-        `http://192.168.0.151:5000/project/${projectId}/addTask`,
+        `${import.meta.env.VITE_BASE_URL}/project/${projectId}/addTask`,
         newTask,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -66,7 +66,7 @@ const TaskManager = () => {
     }
 
     // Send PUT or PATCH request to backend
-      await axios.put(`http://192.168.0.151:5000/project/task/${taskId}/updateStatus`, updatePayload, {
+      await axios.put(`${import.meta.env.VITE_BASE_URL}/project/task/${taskId}/updateStatus`, updatePayload, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
